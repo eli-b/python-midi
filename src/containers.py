@@ -43,9 +43,6 @@ class Track(list):
             event.tick -= running_tick
             running_tick += event.tick
 
-    def __repr__(self):
-        return "midi.Track(\\\n  %s)" % (pformat(list(self)).replace('\n', '\n  '), )
-
     def __getitem__(self, item):
         if isinstance(item, slice):
             indices = item.indices(len(self))
@@ -56,3 +53,6 @@ class Track(list):
     def __getslice__(self, i, j):
         # The deprecated __getslice__ is still called when subclassing built-in types
         return self.__getitem__(slice(i,j))
+
+    def __repr__(self):
+        return "midi.Track(\\\n  %s)" % (pformat(list(self)).replace('\n', '\n  '), )
