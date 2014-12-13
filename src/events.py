@@ -137,6 +137,18 @@ class AfterTouchEvent(Event):
     statusmsg = 0xA0
     length = 2
     name = 'After Touch'
+    
+    def get_pitch(self):
+        return self.data[0]
+    def set_pitch(self, val):
+        self.data[0] = val
+    pitch = property(get_pitch, set_pitch)
+    
+    def get_value(self):
+        return self.data[1]
+    def set_value(self, val):
+        self.data[1] = val
+    value = property(get_value, set_value)
 
 class ControlChangeEvent(Event):
     __slots__ = ['control', 'value']
@@ -250,6 +262,11 @@ class MarkerEvent(MetaEventWithText):
 class CuePointEvent(MetaEventWithText):
     name = 'Cue Point'
     metacommand = 0x07
+    length = 'varlen'
+
+class ProgramNameEvent(MetaEventWithText):
+    name = 'Program Name'
+    metacommand = 0x08
     length = 'varlen'
 
 class SomethingEvent(MetaEvent):
